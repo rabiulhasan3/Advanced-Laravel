@@ -22,3 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Form Validation
 Route::get('form','validation\FormValidationController@index')->name('form');
 Route::post('store','validation\FormValidationController@store')->name('form.store');
+
+Route::get('/lang/{lang?}',function($lang=null){
+	 App::setLocale($lang);
+	 return view('lang');
+});
