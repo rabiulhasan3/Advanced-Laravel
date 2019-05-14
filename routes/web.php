@@ -1,5 +1,8 @@
 <?php
 
+use App\Jobs\SendMailJob;
+use carbon\carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,4 +29,13 @@ Route::post('store','validation\FormValidationController@store')->name('form.sto
 Route::get('/lang/{lang?}',function($lang=null){
 	 App::setLocale($lang);
 	 return view('lang');
+});
+
+
+Route::get('sendmail',function(){
+	$job = (new SendMailJob())
+			->delay(Carbon::now()->addSeconds(5));
+			dd($job);
+	dispatch($job);
+	return 'successfully send';
 });
