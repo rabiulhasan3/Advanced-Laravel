@@ -2,6 +2,7 @@
 
 use App\Jobs\SendMailJob;
 use carbon\carbon;
+use App\Events\TaskEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,8 @@ Route::get('sendmail',function(){
 			dd($job);
 	dispatch($job);
 	return 'successfully send';
+});
+
+Route::get('event',function(){
+	event(new TaskEvent('Hey How are you ? Man !!'));
 });
