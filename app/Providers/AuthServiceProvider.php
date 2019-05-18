@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
+       'App\User' => 'App\Policies\subsPolocy',
     ];
 
     /**
@@ -25,14 +26,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('subs-only', function ($user) {
-
-           if( $user->subs == 1){
-            return true;
-           }else{
-            return false;
-           }
-
-        });
+        Gate::define('subs-only','App\Policies\subsPolocy@subscriber_only');
     }
 }
