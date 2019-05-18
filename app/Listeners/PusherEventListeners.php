@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\TaskEvent;
+use App\Events\PusherEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TaskEventListeners
+class PusherEventListeners
 {
     /**
      * Create the event listener.
@@ -21,11 +21,11 @@ class TaskEventListeners
     /**
      * Handle the event.
      *
-     * @param  TaskEvent  $event
+     * @param  PusherEvent  $event
      * @return void
      */
-    public function handle(TaskEvent $event)
+    public function handle(PusherEvent $event)
     {
-        return $event;
+       
     }
 }

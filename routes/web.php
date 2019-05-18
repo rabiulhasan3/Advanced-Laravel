@@ -3,6 +3,7 @@
 use App\Jobs\SendMailJob;
 use carbon\carbon;
 use App\Events\TaskEvent;
+use App\Events\PusherEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,7 @@ Route::get('sendmail',function(){
 Route::get('event',function(){
 	event(new TaskEvent('Hey How are you ? Man !!'));
 });
+
+
+Route::get('chat','pusherController@chat');
+Route::get('send','pusherController@send');

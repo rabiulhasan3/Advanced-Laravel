@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\TaskEvent' => [
             'App\Listeners\TaskEventListeners',
         ],
+        'App\Events\PusherEvent' => [
+            'App\Listeners\PusherEventListeners',
+        ],
     ];
 
     /**
