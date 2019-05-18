@@ -49,3 +49,12 @@ Route::get('event',function(){
 
 Route::get('chat','pusherController@chat');
 Route::get('send','pusherController@send');
+
+Route::get('subs',function(){
+	if (Gate::allows('subs-only', Auth::user())) {
+    	return view('subscriber');
+	}else{
+		echo 'you are not subscriber. <a href="">please subscribe</a>';
+	}
+	
+});
