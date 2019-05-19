@@ -4,6 +4,8 @@ use App\Jobs\SendMailJob;
 use carbon\carbon;
 use App\Events\TaskEvent;
 use App\Events\PusherEvent;
+use App\Notifications\TaskCompleateNotification;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,3 +61,10 @@ Route::get('subs',function(){
 	
 });
 
+
+
+Route::get('send-notification',function(){
+	//User::find(1)->notify(new TaskCompleateNotification);
+	$users = User::find(1);
+	Notification::send($users, new TaskCompleateNotification());
+});
