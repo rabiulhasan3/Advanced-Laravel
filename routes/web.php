@@ -5,6 +5,7 @@ use carbon\carbon;
 use App\Events\TaskEvent;
 use App\Events\PusherEvent;
 use App\Notifications\TaskCompleateNotification;
+use App\Notifications\databaseNotification;
 use App\User;
 
 /*
@@ -83,4 +84,10 @@ Route::get('format-mail-notification',function(){
 	Notification::route('mail', 'admin@example.com')
             ->route('nexmo', '5555555555')
             ->notify(new TaskCompleateNotification($user));
+});
+
+Route::get('database-notification',function(){
+
+	$user = User::find(1);
+	$user->notify(new databaseNotification);
 });

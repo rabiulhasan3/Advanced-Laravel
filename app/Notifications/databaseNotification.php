@@ -7,19 +7,18 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class TaskCompleateNotification extends Notification implements ShouldQueue
+class databaseNotification extends Notification
 {
     use Queueable;
-    public $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -30,7 +29,7 @@ class TaskCompleateNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database','mail'];
     }
 
     /**
@@ -41,13 +40,10 @@ class TaskCompleateNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        // return (new MailMessage)
-        //             ->line('This is the line text.')
-        //             ->subject('Notification Test')
-        //             ->action('Notification Action', url('/'))
-        //             ->line('Thank you for using our application!');
-
-        return (new MailMessage)->view('notificationView',['user'=>$this->user]);
+        return (new MailMessage)
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
@@ -59,7 +55,8 @@ class TaskCompleateNotification extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'data' => 'Hello world',
+            
+            'data' => 'Hello Nepson',
         ];
     }
 }
