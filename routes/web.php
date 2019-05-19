@@ -39,7 +39,7 @@ Route::get('/lang/{lang?}',function($lang=null){
 Route::get('sendmail',function(){
 	$job = (new SendMailJob())
 			->delay(Carbon::now()->addSeconds(5));
-			dd($job);
+			
 	dispatch($job);
 	return 'successfully send';
 });
@@ -67,4 +67,11 @@ Route::get('send-notification',function(){
 	//User::find(1)->notify(new TaskCompleateNotification);
 	$users = User::find(1);
 	Notification::send($users, new TaskCompleateNotification());
+});
+
+
+Route::get('queue-notification',function(){
+	$when = now()->addSeconds(10);
+	$user = User::find(1);
+	$user->notify((new TaskCompleateNotification)->delay($when));
 });
