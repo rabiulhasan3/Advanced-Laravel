@@ -75,3 +75,12 @@ Route::get('queue-notification',function(){
 	$user = User::find(1);
 	$user->notify((new TaskCompleateNotification)->delay($when));
 });
+
+
+Route::get('format-mail-notification',function(){
+
+	$user = User::find(1);
+	Notification::route('mail', 'admin@example.com')
+            ->route('nexmo', '5555555555')
+            ->notify(new TaskCompleateNotification($user));
+});

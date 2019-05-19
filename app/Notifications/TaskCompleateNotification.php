@@ -10,15 +10,16 @@ use Illuminate\Notifications\Messages\MailMessage;
 class TaskCompleateNotification extends Notification implements ShouldQueue
 {
     use Queueable;
+    public $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -40,10 +41,13 @@ class TaskCompleateNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        // return (new MailMessage)
+        //             ->line('This is the line text.')
+        //             ->subject('Notification Test')
+        //             ->action('Notification Action', url('/'))
+        //             ->line('Thank you for using our application!');
+
+        return (new MailMessage)->view('notificationView',['user'=>$this->user]);
     }
 
     /**
